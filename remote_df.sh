@@ -13,9 +13,12 @@ dn03.cdh.exem
 for ser in "${arr_server[@]}"
 do
   expect << EOF
-  spawn ssh jhkang@$ser "df -Ph"
-  expect "*password:"
-  send "$pass\r"
+  spawn ssh jhkang@$ser 
+	expect "(yes/no)?" {
+		send "yes\r"
+		expect "*?assword" { send "$pass\r" }
+	} "*?assword" { send "$pass\r" }
+	send "df -Ph\r"
   expect eof
 EOF
 done
