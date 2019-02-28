@@ -1,0 +1,5 @@
+TODAY=`date  +%Y%m%d`
+curl "<namenode_webui_address>/dfshealth.jsp" >> /home/xxxx/bin/hdfs_report_$TODAY.html
+
+echo "This mail is HDFS report mail" | mailx -a "/home/xxxx/bin/hdfs_report_$TODAY.html" -s "This mail is HDFS report mail" -r noreply@`hostname` <mail_receiver>
+rm /home/xxxx/bin/hdfs_report_$TODAY.html
